@@ -1,11 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
+
 require("dotenv").config({ path: "./.env" });
 //
 mongoose.connect(process.env.MONGO_URL);
 const app = express();
 app.use(cors());
+app.use(express.static(path.join(__dirname, "dist", "index.html")));
 app.use(express.json());
 // routes
 app.use("/api/admin", require("./routes/adminRoute"));
